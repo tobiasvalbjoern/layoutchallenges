@@ -22,15 +22,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         // get references
-        val btnclick= findViewById<Button>(R.id.button)
-        val changedoutput= findViewById<TextView>(R.id.output)
+        val btnClick= findViewById<Button>(R.id.button)
+        val altOut= findViewById<TextView>(R.id.output)
         val input= findViewById<EditText>(R.id.editText)
         // set on-click listener
-        btnclick.setOnClickListener{
+        btnClick.setOnClickListener{
             if (input != null) {
                 val str=input.text.toString()
                 if(str.isNotEmpty()){
-                changedoutput.text = sortString(str)}
+                altOut.text = sortString(str)}
             }
 
 
