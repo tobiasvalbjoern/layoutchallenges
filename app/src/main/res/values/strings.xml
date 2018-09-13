@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">layoutchallenges</string>
-    <string name="inputTextString">Input</string>
     <string name="button">Run</string>
     <string name="output_label">Output</string>
+    <string name="output_field">[Inptu]</string>
+    <string name="input__hint">Input</string>
 </resources>

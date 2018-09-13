@@ -26,10 +26,11 @@
         android:layout_marginTop="18dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="@string/inputTextString"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/output_label" />
+        app:layout_constraintTop_toBottomOf="@+id/output_label"
+        android:hint="@string/input__hint"
+        />
 
     <Button
         android:id="@+id/button"
@@ -48,7 +49,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="7dp"
-        android:text="[tupnI]"
+        android:text="@string/output_field"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
