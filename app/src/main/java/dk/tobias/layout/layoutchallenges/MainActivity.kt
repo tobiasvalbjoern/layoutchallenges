@@ -3,92 +3,61 @@ package dk.tobias.layout.layoutchallenges
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
+import kotlinx.android.synthetic.main.activity_main.*
 
+fun sortString(inputStr:String): String=
+        inputStr.toCharArray().sorted().joinToString(",","[","]")
 
-fun sortString(inputStr:String): String{
-
-    val arr=inputStr.toCharArray()
-    arr.sort()
-    return "["+arr.joinToString("")+"]"
-}
-
-
-
-/*
-fun onRadioButtonClicked(view: View) {
-    // Is the button now checked?
-    val checked = (view as RadioButton).isChecked
-
-    // Check which radio button was clicked
-    when (view.getId()) {
-        R.id.radio1 -> {
-            if (checked)
-            //Radio 1 chosen
-                println("Radio 1 chosen")
+fun longestWord(inputStr: String): String{
+    val words=inputStr.split(' ')
+    var longest = 0
+    var word = ""
+    for (i in words) {
+        if (longest < i.length) {
+            longest = i.length
+            word = i
         }
-        R.id.radio2 -> {
-            if (checked)
-            //Radio 2 chosen
-                println("Radio 2 chosen")
-        }
-
     }
+    return "[$word]"
 }
-*/
 
 class MainActivity : AppCompatActivity() {
-    enum class RadioState {
-        UNSET,RADIO1, RADIO2
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //val radioGroupClick=findViewById<RadioGroup>(R.id.radioGroup)
-        //onRadioButtonClicked(radioGroupClick)
-        var radioFlag = RadioState.UNSET
+        var radio1=true
+        radioGroup.setOnCheckedChangeListener { _, checkedId ->
+            var text = getString(R.string.toastMsg)
 
-        val radioGroup = findViewById<RadioGroup>(R.id.radioGroup)
-        radioGroup?.setOnCheckedChangeListener { _, checkedId ->
-            var text = "You selected: "
-            if (R.id.radio1 == checkedId){
-                text += resources.getString(R.string.challenge1)
-                Toast.makeText(applicationContext, text, Toast.LENGTH_SHORT).show()
-                //flagRadio1=true
-                //flagRadio2=false
-                radioFlag=RadioState.RADIO1
-            }
-
-            else {
-                text += resources.getString(R.string.challenge2)
-                Toast.makeText(applicationContext, text, Toast.LENGTH_SHORT).show()
-                //flagRadio2=true
-                //flagRadio1=false
-                radioFlag=RadioState.RADIO2
+            when(checkedId){
+                R.id.radio1->{
+                    text += resources.getString(R.string.alphabetic)
+                    Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
+                    radio1=true
+                }
+                else->{
+                    text += resources.getString(R.string.longestWord)
+                    Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
+                    radio1=false
+                }
             }
         }
 
-        // get references
-        val btnClick= findViewById<Button>(R.id.button)
-        val altOut= findViewById<TextView>(R.id.output)
-        val input= findViewById<EditText>(R.id.editText)
-        // set on-click listener
-        btnClick.setOnClickListener {
-            if (input != null) {
-                val str = input.text.toString()
+        button.setOnClickListener {
+            if (editText != null) {
+                val str = editText.text.toString()
                 if (str.isNotEmpty()) {
 
-                    if (radioFlag==RadioState.RADIO1) {
-                        altOut.text = sortString(str)
+                    if (radio1) {
+                        output.text = sortString(str)
                     }
-                    if(radioFlag==RadioState.RADIO2){
-                        altOut.text = "hej"
+                    if(!radio1){
+                        output.text = longestWord(str)
                     }
                 }
             }
 
         }}
-
-
 }
